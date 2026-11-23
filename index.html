@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[公司名称] · 批发供应商</title>
+<meta name="description" content="[公司名称] — 面向批发商的可靠供货伙伴，WhatsApp 直接询价。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAF6F0; --surface:#FFFFFF; --sand:#F2E8DB; --sand-2:#E8D9C6;
+    --ink:#2F2620; --muted:#76665A; --line:#E6DACB;
+    --accent:#B5633A; --accent-dark:#8E4A27; --accent-soft:#F6E3D6;
+    --wa:#1FA855; --wa-dark:#178544;
+    --radius:18px; --shadow:0 10px 30px -12px rgba(73,48,30,.18);
+    --font-head:"Noto Serif SC","Fraunces",serif;
+    --font-body:"Noto Sans SC","DM Sans",system-ui,sans-serif;
+  }
+  html[lang="en"]{ --font-head:"Fraunces",Georgia,serif; --font-body:"DM Sans",system-ui,sans-serif; }
+  html[lang="ar"]{ --font-head:"Amiri","IBM Plex Sans Arabic",serif; --font-body:"IBM Plex Sans Arabic",system-ui,sans-serif; }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:80px}
+  body{background:var(--bg);color:var(--ink);font-family:var(--font-body);line-height:1.7;font-size:16px;-webkit-font-smoothing:antialiased}
+  html[lang="ar"] body{font-size:17px}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  .wrap{width:min(1160px,100% - 40px);margin-inline:auto}
+  h1,h2,h3{font-family:var(--font-head);line-height:1.25;font-weight:600;letter-spacing:-.01em}
+  html[lang="ar"] h1,html[lang="ar"] h2,html[lang="ar"] h3{font-weight:700;letter-spacing:0;line-height:1.4}
+  em{font-style:normal;color:var(--accent)}
+
+  /* buttons */
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:13px 24px;border-radius:999px;font-weight:500;font-size:15px;border:1.5px solid transparent;cursor:pointer;transition:.2s;white-space:nowrap;font-family:inherit}
+  .btn svg{width:19px;height:19px;flex-shrink:0}
+  .btn-wa{background:var(--wa);color:#fff}
+  .btn-wa:hover{background:var(--wa-dark);transform:translateY(-1px)}
+  .btn-ghost{border-color:var(--ink);color:var(--ink);background:transparent}
+  .btn-ghost:hover{background:var(--ink);color:var(--bg)}
+  .btn-sm{padding:9px 18px;font-size:14px}
+
+  /* header */
+  header{position:sticky;top:0;z-index:50;background:rgba(250,246,240,.88);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .2s}
+  header.scrolled{border-bottom-color:var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:72px;gap:20px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand-mark{width:40px;height:40px;border-radius:12px;background:var(--accent);color:#fff;display:grid;place-items:center;font-family:var(--font-head);font-weight:700;font-size:18px}
+  .brand-name{font-family:var(--font-head);font-weight:700;font-size:18px;line-height:1.2}
+  .brand-tag{font-size:12px;color:var(--muted)}
+  .menu{display:flex;gap:28px;list-style:none}
+  .menu a{font-size:15px;color:var(--muted);transition:color .2s}
+  .menu a:hover{color:var(--ink)}
+  .nav-right{display:flex;align-items:center;gap:12px}
+  .lang{display:flex;background:var(--sand);border-radius:999px;padding:3px}
+  .lang button{white-space:nowrap;border:0;background:transparent;padding:6px 11px;border-radius:999px;font-size:13px;cursor:pointer;color:var(--muted);font-family:"DM Sans","Noto Sans SC","IBM Plex Sans Arabic",sans-serif}
+  .lang button.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .burger{display:none;border:0;background:transparent;cursor:pointer;padding:6px}
+  .burger svg{width:26px;height:26px}
+
+  /* hero */
+  .hero{padding:72px 0 56px}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  .eyebrow{display:inline-block;font-size:13px;font-weight:500;color:var(--accent-dark);background:var(--accent-soft);padding:6px 14px;border-radius:999px;margin-bottom:20px}
+  .hero h1{font-size:clamp(34px,4.6vw,56px);margin-bottom:20px}
+  .hero p{color:var(--muted);font-size:17px;max-width:34em;margin-bottom:32px}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:14px}
+  .hero-visual{position:relative}
+  .ph{background:repeating-linear-gradient(135deg,var(--sand) 0 14px,var(--sand-2) 14px 15px);border-radius:var(--radius);display:grid;place-items:center;color:var(--muted);font-size:14px;text-align:center;padding:16px}
+  .ph svg{width:36px;height:36px;opacity:.55;margin:0 auto 8px;display:block}
+  .hero-visual .ph{aspect-ratio:4/4.3}
+  .float-card{position:absolute;inset-inline-start:-28px;bottom:36px;background:var(--surface);border-radius:14px;padding:16px 20px;box-shadow:var(--shadow);display:flex;gap:14px;align-items:center}
+  .float-card .dot{width:42px;height:42px;border-radius:50%;background:var(--accent-soft);display:grid;place-items:center;color:var(--accent)}
+  .float-card .dot svg{width:22px;height:22px}
+  .float-card b{display:block;font-size:15px}
+  .float-card span{font-size:13px;color:var(--muted)}
+
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);margin-top:56px}
+  .stat{padding:28px 24px;text-align:center}
+  .stat + .stat{border-inline-start:1px solid var(--line)}
+  .stat b{display:block;direction:ltr;font-family:"Fraunces",serif;font-size:34px;color:var(--accent);line-height:1.1}
+  .stat span{font-size:14px;color:var(--muted)}
+
+  /* sections */
+  section{padding:88px 0}
+  .sec-head{max-width:640px;margin-bottom:44px}
+  .sec-head.center{text-align:center;margin-inline:auto}
+  .sec-head h2{font-size:clamp(28px,3.4vw,40px);margin-bottom:14px}
+  .sec-head p{color:var(--muted)}
+
+  /* about */
+  .about{background:var(--surface)}
+  .about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center}
+  .about-grid .ph{aspect-ratio:5/4}
+  .about-text p{color:var(--muted);margin-bottom:16px}
+  .checks{list-style:none;margin-top:24px;display:grid;gap:12px}
+  .checks li{display:flex;align-items:center;gap:12px;font-weight:500}
+  .checks svg{width:22px;height:22px;color:var(--accent);flex-shrink:0}
+
+  /* products */
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px}
+  .chip{border:1.5px solid var(--line);background:transparent;padding:8px 18px;border-radius:999px;cursor:pointer;font-size:14px;color:var(--muted);font-family:inherit;transition:.2s}
+  .chip:hover{border-color:var(--ink);color:var(--ink)}
+  .chip.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .card{background:var(--surface);border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s}
+  .card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+  .card .ph{border-radius:0;aspect-ratio:4/3}
+  .card-body{padding:20px 22px 22px;display:flex;flex-direction:column;gap:6px;flex:1}
+  .card-cat{font-size:12px;color:var(--accent-dark);font-weight:500}
+  .card h3{font-size:20px}
+  .card-spec{font-size:14px;color:var(--muted)}
+  .card-foot{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:14px;border-top:1px dashed var(--line);gap:10px}
+  .moq{font-size:13px;color:var(--muted)}
+  .moq b{color:var(--ink)}
+
+  /* why */
+  .why{background:var(--sand)}
+  .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .why-item{background:var(--bg);border-radius:var(--radius);padding:28px 24px}
+  .why-icon{width:48px;height:48px;border-radius:14px;background:var(--accent);color:#fff;display:grid;place-items:center;margin-bottom:18px}
+  .why-icon svg{width:24px;height:24px}
+  .why-item h3{font-size:19px;margin-bottom:8px}
+  .why-item p{font-size:14.5px;color:var(--muted)}
+
+  /* process */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;counter-reset:s}
+  .step{position:relative;padding-top:20px;border-top:2px solid var(--line)}
+  .step::before{counter-increment:s;content:"0" counter(s);font-family:"Fraunces",serif;font-size:15px;color:var(--accent);font-weight:600;display:block;margin-bottom:10px}
+  .step h3{font-size:19px;margin-bottom:6px}
+  .step p{font-size:14.5px;color:var(--muted)}
+
+  /* contact */
+  .contact{background:var(--surface)}
+  .contact-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:48px;align-items:stretch}
+  .info{list-style:none;display:grid;gap:18px;margin:28px 0 32px}
+  .info li{display:flex;gap:14px;align-items:flex-start}
+  .info .ic{width:42px;height:42px;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;flex-shrink:0}
+  .info .ic svg{width:20px;height:20px}
+  .info small{display:block;font-size:13px;color:var(--muted)}
+  .info span{font-weight:500}
+  .ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+  .map{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);min-height:400px;position:relative;background:var(--sand)}
+  .map iframe{width:100%;height:100%;min-height:400px;border:0;display:block}
+  .map-link{position:absolute;bottom:14px;inset-inline-end:14px;background:var(--surface);padding:8px 14px;border-radius:999px;font-size:13px;box-shadow:var(--shadow);font-weight:500}
+
+  /* footer */
+  footer{background:var(--ink);color:#CDBFB2;padding:40px 0;font-size:14px}
+  .foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+  footer .brand-name{color:#fff}
+  footer a:hover{color:#fff}
+  .foot-links{display:flex;gap:22px;flex-wrap:wrap}
+
+  /* floating whatsapp */
+  .wa-float{position:fixed;bottom:22px;inset-inline-end:22px;z-index:60;width:60px;height:60px;border-radius:50%;background:var(--wa);color:#fff;display:grid;place-items:center;box-shadow:0 10px 24px -6px rgba(31,168,85,.55);transition:transform .2s}
+  .wa-float:hover{transform:scale(1.07)}
+  .wa-float svg{width:30px;height:30px}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+  /* responsive */
+  @media (max-width:980px){
+    .hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr;gap:40px}
+    .hero-visual{max-width:520px}
+    .grid{grid-template-columns:repeat(2,1fr)}
+    .why-grid,.steps{grid-template-columns:repeat(2,1fr)}
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .stat:nth-child(3){border-inline-start:0}
+    .stat:nth-child(n+3){border-top:1px solid var(--line)}
+  }
+  @media (max-width:860px){
+    .menu{display:none;position:absolute;top:72px;inset-inline:0;background:var(--bg);flex-direction:column;gap:0;padding:8px 20px 16px;border-bottom:1px solid var(--line)}
+    .menu.open{display:flex}
+    .menu a{display:block;padding:12px 0;font-size:16px;color:var(--ink)}
+    .burger{display:block}
+    .nav-right .btn{display:none}
+  }
+  @media (max-width:600px){
+    section{padding:64px 0}
+    .hero{padding:40px 0 32px}
+    .grid,.why-grid,.steps{grid-template-columns:1fr}
+    .float-card{inset-inline-start:12px;bottom:12px}
+    .brand-tag{display:none}
+    .lang button{padding:6px 8px}
+    .stat{padding:20px 12px}
+    .stat b{font-size:28px}
+  }
+</style>
+</head>
+<body>
+
+<header id="top">
+  <div class="wrap nav">
+    <a href="#home" class="brand" aria-label="Home">
+      <div class="brand-mark" data-i18n="brand.mark">L</div>
+      <div>
+        <div class="brand-name" data-i18n="brand.name"></div>
+        <div class="brand-tag" data-i18n="brand.tag"></div>
+      </div>
+    </a>
+    <ul class="menu" id="menu">
+      <li><a href="#home" data-i18n="nav.home"></a></li>
+      <li><a href="#about" data-i18n="nav.about"></a></li>
+      <li><a href="#products" data-i18n="nav.products"></a></li>
+      <li><a href="#process" data-i18n="nav.process"></a></li>
+      <li><a href="#contact" data-i18n="nav.contact"></a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="lang" role="group" aria-label="Language">
+        <button data-lang="zh">中文</button>
+        <button data-lang="en">EN</button>
+        <button data-lang="ar">العربية</button>
+      </div>
+      <a class="btn btn-wa btn-sm wa-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.6-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg><span data-i18n="nav.cta"></span></a>
+      <button class="burger" id="burger" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="reveal">
+          <span class="eyebrow" data-i18n="hero.eyebrow"></span>
+          <h1 data-i18n-html="hero.title"></h1>
+          <p data-i18n="hero.desc"></p>
+          <div class="hero-cta">
+            <a class="btn btn-wa wa-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.6-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg><span data-i18n="hero.cta1"></span></a>
+            <a class="btn btn-ghost" href="#products" data-i18n="hero.cta2"></a>
+          </div>
+        </div>
+        <div class="hero-visual reveal">
+          <div class="ph"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/></svg><span data-i18n="hero.img"></span></div></div>
+          <div class="float-card">
+            <div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg></div>
+            <div><b data-i18n="hero.badge1"></b><span data-i18n="hero.badge2"></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="stats reveal">
+        <div class="stat"><b>10+</b><span data-i18n="stat.1"></span></div>
+        <div class="stat"><b>500+</b><span data-i18n="stat.2"></span></div>
+        <div class="stat"><b>20+</b><span data-i18n="stat.3"></span></div>
+        <div class="stat"><b>24h</b><span data-i18n="stat.4"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="wrap about-grid">
+      <div class="ph reveal"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21V9l9-6 9 6v12"/><path d="M9 21v-6h6v6"/></svg><span data-i18n="about.img"></span></div></div>
+      <div class="about-text reveal">
+        <span class="eyebrow" data-i18n="about.eyebrow"></span>
+        <h2 data-i18n="about.title" style="font-size:clamp(28px,3.4vw,40px);margin-bottom:18px"></h2>
+        <p data-i18n="about.p1"></p>
+        <p data-i18n="about.p2"></p>
+        <ul class="checks">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg><span data-i18n="about.c1"></span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg><span data-i18n="about.c2"></span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg><span data-i18n="about.c3"></span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="products">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow" data-i18n="products.eyebrow"></span>
+        <h2 data-i18n="products.title"></h2>
+        <p data-i18n="products.desc"></p>
+      </div>
+      <div class="chips" id="chips"></div>
+      <div class="grid" id="productGrid"></div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="why">
+    <div class="wrap">
+      <div class="sec-head center reveal">
+        <span class="eyebrow" data-i18n="why.eyebrow"></span>
+        <h2 data-i18n="why.title"></h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-item reveal"><div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg></div><h3 data-i18n="why.1t"></h3><p data-i18n="why.1d"></p></div>
+        <div class="why-item reveal"><div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg></div><h3 data-i18n="why.2t"></h3><p data-i18n="why.2d"></p></div>
+        <div class="why-item reveal"><div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M17.5 14v7M14 17.5h7"/></svg></div><h3 data-i18n="why.3t"></h3><p data-i18n="why.3d"></p></div>
+        <div class="why-item reveal"><div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6H2v12h2"/><path d="M14 9h4l4 4v5h-2"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/><path d="M9 18h6"/></svg></div><h3 data-i18n="why.4t"></h3><p data-i18n="why.4d"></p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow" data-i18n="process.eyebrow"></span>
+        <h2 data-i18n="process.title"></h2>
+      </div>
+      <div class="steps">
+        <div class="step reveal"><h3 data-i18n="process.1t"></h3><p data-i18n="process.1d"></p></div>
+        <div class="step reveal"><h3 data-i18n="process.2t"></h3><p data-i18n="process.2d"></p></div>
+        <div class="step reveal"><h3 data-i18n="process.3t"></h3><p data-i18n="process.3d"></p></div>
+        <div class="step reveal"><h3 data-i18n="process.4t"></h3><p data-i18n="process.4d"></p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="wrap contact-grid">
+      <div class="reveal">
+        <span class="eyebrow" data-i18n="contact.eyebrow"></span>
+        <h2 data-i18n="contact.title" style="font-size:clamp(28px,3.4vw,40px);margin-bottom:12px"></h2>
+        <p style="color:var(--muted)" data-i18n="contact.desc"></p>
+        <ul class="info">
+          <li><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.6-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg></div><div><small>WhatsApp</small><a class="wa-link" target="_blank" rel="noopener"><span class="ltr" id="waDisplay"></span></a></div></li>
+          <li><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></div><div><small data-i18n="contact.phone"></small><a id="phoneLink"><span class="ltr" id="phoneDisplay"></span></a></div></li>
+          <li><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></div><div><small data-i18n="contact.email"></small><a id="emailLink"><span class="ltr" id="emailDisplay"></span></a></div></li>
+          <li><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><small data-i18n="contact.address"></small><span data-i18n="contact.addressVal"></span></div></li>
+          <li><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div><small data-i18n="contact.hours"></small><span data-i18n="contact.hoursVal"></span></div></li>
+        </ul>
+        <a class="btn btn-wa wa-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.6-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg><span data-i18n="contact.btn"></span></a>
+      </div>
+      <div class="map reveal">
+        <iframe id="mapFrame" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map"></iframe>
+        <a class="map-link" id="mapLink" target="_blank" rel="noopener" data-i18n="contact.mapOpen"></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div class="brand"><div class="brand-mark" data-i18n="brand.mark">L</div><div class="brand-name" data-i18n="brand.name"></div></div>
+    <div class="foot-links">
+      <a href="#about" data-i18n="nav.about"></a>
+      <a href="#products" data-i18n="nav.products"></a>
+      <a href="#contact" data-i18n="nav.contact"></a>
+    </div>
+    <div id="copyright"></div>
+  </div>
+</footer>
+
+<a class="wa-float wa-link" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.6-5.4A8.4 8.4 0 1 1 21 11.5z"/><path d="M9 10.5c.5 1.5 1.8 2.8 3.5 3.5"/></svg></a>
+
+<script>
+/* =========================================================
+   ① 公司信息配置 —— 换成你的真实信息即可
+   ========================================================= */
+const CONFIG = {
+  whatsapp: "971500000000",          // WhatsApp 号码：国家码+号码，不带 + 和空格
+  whatsappDisplay: "+971 50 000 0000",
+  phone: "+971 4 000 0000",
+  email: "sales@yourcompany.com",
+  mapQuery: "Dubai, United Arab Emirates", // 地图位置：填写地址或 "纬度,经度"
+  year: new Date().getFullYear()
+};
+
+/* =========================================================
+   ② 商品信息 —— 按示例格式增删即可（cat 对应下方 CATEGORIES）
+   ========================================================= */
+const CATEGORIES = [
+  { id: "a", zh: "类别 A", en: "Category A", ar: "الفئة أ" },
+  { id: "b", zh: "类别 B", en: "Category B", ar: "الفئة ب" },
+  { id: "c", zh: "类别 C", en: "Category C", ar: "الفئة ج" }
+];
+const PRODUCTS = [
+  { cat:"a", moq:100, name:{zh:"示例商品 1",en:"Sample Product 1",ar:"منتج تجريبي 1"}, spec:{zh:"规格：[尺寸 / 材质 / 包装方式]",en:"Specs: [size / material / packaging]",ar:"المواصفات: [المقاس / الخامة / التغليف]"} },
+  { cat:"a", moq:200, name:{zh:"示例商品 2",en:"Sample Product 2",ar:"منتج تجريبي 2"}, spec:{zh:"规格：[尺寸 / 材质 / 包装方式]",en:"Specs: [size / material / packaging]",ar:"المواصفات: [المقاس / الخامة / التغليف]"} },
+  { cat:"b", moq:50,  name:{zh:"示例商品 3",en:"Sample Product 3",ar:"منتج تجريبي 3"}, spec:{zh:"规格：[尺寸 / 材质 / 包装方式]",en:"Specs: [size / material / packaging]",ar:"المواصفات: [المقاس / الخامة / التغليف]"} },
+  { cat:"b", moq:100, name:{zh:"示例商品 4",en:"Sample Product 4",ar:"منتج تجريبي 4"}, spec:{zh:"规格：[尺寸 / 材质 / 包装方式]",en:"Specs: [size / material / packaging]",ar:"المواصفات: [المقاس / الخامة / التغليف]"} },
+  { cat:"c", moq:300, name:{zh:"示例商品 5",en:"Sample Product 5",ar:"منتج تجريبي 5"}, spec:{zh:"规格：[尺寸 / 材质 / 包装方式]",en:"Specs: [size / material / packaging]",ar:"المواصفات: [المقاس / الخامة / التغليف]"} },
+  { cat:"c", moq:100, name:{zh:"示例商品 6",en:"Sample Product 6",ar:"منتج تجريبي 6"}, spec:{zh:"规格：[尺寸 / 材质 / 包装方式]",en:"Specs: [size / material / packaging]",ar:"المواصفات: [المقاس / الخامة / التغليف]"} }
+  // 如需商品图片，可加 img:"images/xxx.jpg"
+];
+
+/* =========================================================
+   ③ 三语文案 —— [方括号] 内为占位内容，请替换
+   ========================================================= */
+const T = {
+  zh: {
+    "meta.title":"[公司名称] · 批发供应商",
+    "brand.mark":"L","brand.name":"[公司名称]","brand.tag":"批发供应商",
+    "nav.home":"首页","nav.about":"公司简介","nav.products":"商品信息","nav.process":"合作流程","nav.contact":"联系我们","nav.cta":"WhatsApp",
+    "hero.eyebrow":"批发商值得信赖的供货伙伴",
+    "hero.title":"好货源，稳定供，<em>批发更省心</em>",
+    "hero.desc":"[一句话介绍：我们主营 XX 类商品，为中东及周边地区的批发商提供稳定货源、有竞争力的批发价格和快速发货。]",
+    "hero.cta1":"WhatsApp 咨询报价","hero.cta2":"查看商品",
+    "hero.img":"主图：商品或仓库照片","hero.badge1":"现货充足","hero.badge2":"[XX] 天内发货",
+    "stat.1":"年行业经验","stat.2":"合作批发商","stat.3":"出口国家和地区","stat.4":"内回复询价",
+    "about.eyebrow":"公司简介","about.title":"[公司名称]：用心做好每一批货",
+    "about.p1":"[公司简介占位：成立于 20XX 年，总部位于 XX，主营 XX、XX 等商品。我们与多家工厂长期合作，从源头把控品质与价格。]",
+    "about.p2":"[补充说明：仓储规模、团队人数、主要服务的市场、典型客户类型等。]",
+    "about.c1":"源头工厂直供","about.c2":"常年现货库存","about.c3":"支持定制与贴牌",
+    "about.img":"公司 / 仓库照片",
+    "products.eyebrow":"商品信息","products.title":"主营商品",
+    "products.desc":"以下为示例商品，可替换为您的实际商品、规格与起订量。点击“询价”即可通过 WhatsApp 直接联系我们。",
+    "products.all":"全部","products.img":"商品图片","products.moq":"起订量","products.unit":"件","products.ask":"询价",
+    "products.msg":"您好，我想咨询【{name}】的批发价格和起订量。",
+    "why.eyebrow":"为什么选择我们","why.title":"批发商选择我们的四个理由",
+    "why.1t":"稳定货源","why.1d":"常年备货，旺季也能按时供货。",
+    "why.2t":"批发价格","why.2d":"源头直供，量大从优，阶梯报价。",
+    "why.3t":"灵活起订","why.3d":"支持小批量试单与多款混批。",
+    "why.4t":"快速发货","why.4d":"现货 [X] 天内发出，支持海运、空运、陆运。",
+    "process.eyebrow":"合作流程","process.title":"四步开始合作",
+    "process.1t":"WhatsApp 联系","process.1d":"告诉我们您需要的商品和数量。",
+    "process.2t":"获取报价","process.2d":"我们提供价格、实拍图和交货期。",
+    "process.3t":"确认下单","process.3d":"确认细节后支付定金。",
+    "process.4t":"发货交付","process.4d":"按约定方式发货，全程跟进物流。",
+    "contact.eyebrow":"联系我们","contact.title":"欢迎通过 WhatsApp 洽谈批发合作",
+    "contact.desc":"发送您需要的商品和数量，我们通常在 24 小时内回复。",
+    "contact.phone":"电话","contact.email":"邮箱","contact.address":"地址","contact.hours":"营业时间",
+    "contact.addressVal":"[详细地址，例如：迪拜 XX 区 XX 路 XX 号仓库]",
+    "contact.hoursVal":"[周一至周六 9:00–18:00]",
+    "contact.btn":"立即 WhatsApp 联系","contact.mapOpen":"在地图中打开 ↗",
+    "wa.msg":"您好，我是批发商，想了解贵公司的商品和批发价格。",
+    "footer.rights":"保留所有权利。"
+  },
+  en: {
+    "meta.title":"[Company Name] · Wholesale Supplier",
+    "brand.mark":"L","brand.name":"[Company Name]","brand.tag":"Wholesale Supplier",
+    "nav.home":"Home","nav.about":"About","nav.products":"Products","nav.process":"How to order","nav.contact":"Contact","nav.cta":"WhatsApp",
+    "hero.eyebrow":"A supply partner wholesalers can rely on",
+    "hero.title":"Quality goods, steady supply, <em>wholesale made easy</em>",
+    "hero.desc":"[One-line intro: We specialise in XX products, giving wholesalers across the Middle East and beyond a steady supply, competitive wholesale prices and fast shipping.]",
+    "hero.cta1":"Get a quote on WhatsApp","hero.cta2":"View products",
+    "hero.img":"Main image: products or warehouse","hero.badge1":"Ready stock","hero.badge2":"Ships within [XX] days",
+    "stat.1":"Years in business","stat.2":"Wholesale partners","stat.3":"Countries served","stat.4":"Quote response",
+    "about.eyebrow":"About us","about.title":"[Company Name]: care in every shipment",
+    "about.p1":"[Company profile placeholder: Founded in 20XX and based in XX, we supply XX, XX and more. Long-term partnerships with factories let us control quality and price at the source.]",
+    "about.p2":"[More detail: warehouse size, team, main markets served, typical customers.]",
+    "about.c1":"Direct from factories","about.c2":"Stock held year-round","about.c3":"Custom & private label",
+    "about.img":"Company / warehouse photo",
+    "products.eyebrow":"Products","products.title":"What we supply",
+    "products.desc":"Sample items below — replace with your real products, specs and MOQs. Tap “Enquire” to reach us directly on WhatsApp.",
+    "products.all":"All","products.img":"Product photo","products.moq":"MOQ","products.unit":"pcs","products.ask":"Enquire",
+    "products.msg":"Hello, I'd like the wholesale price and MOQ for [{name}].",
+    "why.eyebrow":"Why us","why.title":"Four reasons wholesalers choose us",
+    "why.1t":"Steady supply","why.1d":"Stock held year-round, so orders ship on time even in peak season.",
+    "why.2t":"Wholesale pricing","why.2d":"Factory-direct prices with better rates for larger volumes.",
+    "why.3t":"Flexible MOQ","why.3d":"Small trial orders and mixed batches welcome.",
+    "why.4t":"Fast shipping","why.4d":"In-stock items ship within [X] days by sea, air or land.",
+    "process.eyebrow":"How to order","process.title":"Start in four steps",
+    "process.1t":"Message us","process.1d":"Tell us the products and quantities you need on WhatsApp.",
+    "process.2t":"Get a quote","process.2d":"We send pricing, real photos and lead times.",
+    "process.3t":"Confirm","process.3d":"Agree the details and pay the deposit.",
+    "process.4t":"Delivery","process.4d":"We ship as agreed and track it all the way.",
+    "contact.eyebrow":"Contact","contact.title":"Let's talk wholesale on WhatsApp",
+    "contact.desc":"Send us the products and quantities you need — we usually reply within 24 hours.",
+    "contact.phone":"Phone","contact.email":"Email","contact.address":"Address","contact.hours":"Business hours",
+    "contact.addressVal":"[Full address, e.g. Warehouse XX, XX Street, XX, Dubai]",
+    "contact.hoursVal":"[Mon–Sat 9:00–18:00]",
+    "contact.btn":"Chat on WhatsApp now","contact.mapOpen":"Open in Maps ↗",
+    "wa.msg":"Hello, I'm a wholesaler and would like to know more about your products and wholesale prices.",
+    "footer.rights":"All rights reserved."
+  },
+  ar: {
+    "meta.title":"[اسم الشركة] · مورّد بالجملة",
+    "brand.mark":"L","brand.name":"[اسم الشركة]","brand.tag":"مورّد بالجملة",
+    "nav.home":"الرئيسية","nav.about":"من نحن","nav.products":"المنتجات","nav.process":"خطوات الطلب","nav.contact":"اتصل بنا","nav.cta":"واتساب",
+    "hero.eyebrow":"شريك توريد يعتمد عليه تجار الجملة",
+    "hero.title":"بضائع عالية الجودة وتوريد مستقر <em>وتجارة جملة بلا عناء</em>",
+    "hero.desc":"[تعريف مختصر: نحن متخصصون في منتجات XX، ونوفر لتجار الجملة في الشرق الأوسط وخارجه توريداً مستقراً وأسعار جملة تنافسية وشحناً سريعاً.]",
+    "hero.cta1":"اطلب عرض سعر عبر واتساب","hero.cta2":"تصفح المنتجات",
+    "hero.img":"الصورة الرئيسية: المنتجات أو المستودع","hero.badge1":"مخزون جاهز","hero.badge2":"شحن خلال [XX] أيام",
+    "stat.1":"سنوات من الخبرة","stat.2":"شريك جملة","stat.3":"دولة نخدمها","stat.4":"للرد على الاستفسارات",
+    "about.eyebrow":"من نحن","about.title":"[اسم الشركة]: عناية في كل شحنة",
+    "about.p1":"[نبذة عن الشركة: تأسست عام 20XX ومقرها XX، ونورّد منتجات XX وXX وغيرها. شراكاتنا الطويلة مع المصانع تتيح لنا ضبط الجودة والسعر من المصدر.]",
+    "about.p2":"[تفاصيل إضافية: حجم المستودعات، عدد الفريق، الأسواق الرئيسية، نوع العملاء.]",
+    "about.c1":"مباشرة من المصانع","about.c2":"مخزون متوفر طوال العام","about.c3":"تخصيص وعلامة تجارية خاصة",
+    "about.img":"صورة الشركة / المستودع",
+    "products.eyebrow":"المنتجات","products.title":"ما نورّده",
+    "products.desc":"المنتجات أدناه أمثلة — استبدلها بمنتجاتك الفعلية ومواصفاتها والحد الأدنى للطلب. اضغط «استفسر» للتواصل معنا مباشرة عبر واتساب.",
+    "products.all":"الكل","products.img":"صورة المنتج","products.moq":"الحد الأدنى","products.unit":"قطعة","products.ask":"استفسر",
+    "products.msg":"مرحباً، أود معرفة سعر الجملة والحد الأدنى للطلب لـ [{name}].",
+    "why.eyebrow":"لماذا نحن","why.title":"أربعة أسباب تجعل تجار الجملة يختاروننا",
+    "why.1t":"توريد مستقر","why.1d":"مخزون على مدار العام لتسليم الطلبات في موعدها حتى في المواسم.",
+    "why.2t":"أسعار الجملة","why.2d":"أسعار مباشرة من المصنع مع أسعار أفضل للكميات الكبيرة.",
+    "why.3t":"حد أدنى مرن","why.3d":"نرحّب بالطلبات التجريبية الصغيرة والطلبات المختلطة.",
+    "why.4t":"شحن سريع","why.4d":"تُشحن المنتجات المتوفرة خلال [X] أيام بحراً أو جواً أو براً.",
+    "process.eyebrow":"خطوات الطلب","process.title":"ابدأ في أربع خطوات",
+    "process.1t":"راسلنا","process.1d":"أخبرنا عبر واتساب بالمنتجات والكميات التي تحتاجها.",
+    "process.2t":"احصل على عرض سعر","process.2d":"نرسل لك الأسعار والصور الفعلية ومواعيد التسليم.",
+    "process.3t":"أكّد الطلب","process.3d":"اتفق على التفاصيل وادفع العربون.",
+    "process.4t":"التسليم","process.4d":"نشحن حسب الاتفاق ونتابع الشحنة حتى الوصول.",
+    "contact.eyebrow":"اتصل بنا","contact.title":"لنتحدث عن صفقات الجملة عبر واتساب",
+    "contact.desc":"أرسل لنا المنتجات والكميات المطلوبة — نرد عادةً خلال 24 ساعة.",
+    "contact.phone":"الهاتف","contact.email":"البريد الإلكتروني","contact.address":"العنوان","contact.hours":"ساعات العمل",
+    "contact.addressVal":"[العنوان الكامل، مثال: مستودع XX، شارع XX، منطقة XX، دبي]",
+    "contact.hoursVal":"[السبت – الخميس 9:00–18:00]",
+    "contact.btn":"تواصل الآن عبر واتساب","contact.mapOpen":"افتح في الخرائط ↗",
+    "wa.msg":"مرحباً، أنا تاجر جملة وأود معرفة المزيد عن منتجاتكم وأسعار الجملة.",
+    "footer.rights":"جميع الحقوق محفوظة."
+  }
+};
+
+/* ========================================================= */
+let lang = "zh", activeCat = "all";
+const waUrl = (msg) => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
+const esc = (s) => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const imgIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/></svg>';
+
+function renderProducts(){
+  const t = T[lang];
+  document.getElementById("chips").innerHTML =
+    [{id:"all", [lang]:t["products.all"]}, ...CATEGORIES]
+      .map(c => `<button class="chip ${c.id===activeCat?'on':''}" data-cat="${c.id}">${esc(c[lang])}</button>`).join("");
+  const list = PRODUCTS.filter(p => activeCat==="all" || p.cat===activeCat);
+  document.getElementById("productGrid").innerHTML = list.map(p => {
+    const cat = CATEGORIES.find(c => c.id===p.cat);
+    const name = p.name[lang];
+    const media = p.img
+      ? `<img src="${esc(p.img)}" alt="${esc(name)}" style="aspect-ratio:4/3;object-fit:cover;width:100%">`
+      : `<div class="ph"><div>${imgIcon}${esc(t["products.img"])}</div></div>`;
+    return `<article class="card">${media}
+      <div class="card-body">
+        <span class="card-cat">${esc(cat ? cat[lang] : "")}</span>
+        <h3>${esc(name)}</h3>
+        <p class="card-spec">${esc(p.spec[lang])}</p>
+        <div class="card-foot">
+          <span class="moq">${esc(t["products.moq"])}: <b><span class="ltr">${p.moq}</span> ${esc(t["products.unit"])}</b></span>
+          <a class="btn btn-wa btn-sm" target="_blank" rel="noopener" href="${waUrl(t["products.msg"].replace("{name}", name))}">${esc(t["products.ask"])}</a>
+        </div>
+      </div></article>`;
+  }).join("");
+}
+
+function setLang(l){
+  lang = T[l] ? l : "zh";
+  const t = T[lang];
+  const html = document.documentElement;
+  html.lang = lang === "zh" ? "zh-CN" : lang;
+  html.dir = lang === "ar" ? "rtl" : "ltr";
+  document.title = t["meta.title"];
+  document.querySelectorAll("[data-i18n]").forEach(el => { const k = el.dataset.i18n; if (t[k] != null) el.textContent = t[k]; });
+  document.querySelectorAll("[data-i18n-html]").forEach(el => { const k = el.dataset.i18nHtml; if (t[k] != null) el.innerHTML = t[k]; });
+  document.querySelectorAll(".lang button").forEach(b => b.classList.toggle("on", b.dataset.lang === lang));
+  document.querySelectorAll(".wa-link").forEach(a => a.href = waUrl(t["wa.msg"]));
+  document.getElementById("copyright").textContent = `© ${CONFIG.year} ${t["brand.name"]} ${t["footer.rights"]}`;
+  const hl = lang === "zh" ? "zh-CN" : lang;
+  document.getElementById("mapFrame").src = `https://maps.google.com/maps?q=${encodeURIComponent(CONFIG.mapQuery)}&hl=${hl}&z=13&output=embed`;
+  renderProducts();
+  try { localStorage.setItem("site-lang", lang); } catch(e){}
+  const u = new URL(location.href); u.searchParams.set("lang", lang);
+  try { history.replaceState(null, "", u); } catch(e){}
+}
+
+// static contact info
+document.getElementById("waDisplay").textContent = CONFIG.whatsappDisplay;
+document.getElementById("phoneDisplay").textContent = CONFIG.phone;
+document.getElementById("phoneLink").href = "tel:" + CONFIG.phone.replace(/\s/g, "");
+document.getElementById("emailDisplay").textContent = CONFIG.email;
+document.getElementById("emailLink").href = "mailto:" + CONFIG.email;
+document.getElementById("mapLink").href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(CONFIG.mapQuery);
+
+// events
+document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => setLang(b.dataset.lang)));
+document.getElementById("chips").addEventListener("click", e => { const c = e.target.closest(".chip"); if (c){ activeCat = c.dataset.cat; renderProducts(); }});
+const menu = document.getElementById("menu");
+document.getElementById("burger").addEventListener("click", () => menu.classList.toggle("open"));
+menu.addEventListener("click", e => { if (e.target.tagName === "A") menu.classList.remove("open"); });
+const header = document.getElementById("top");
+addEventListener("scroll", () => header.classList.toggle("scrolled", scrollY > 8), {passive:true});
+
+// reveal on scroll
+const io = "IntersectionObserver" in window ? new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }), {threshold:.12}) : null;
+document.querySelectorAll(".reveal").forEach(el => io ? io.observe(el) : el.classList.add("in"));
+
+// initial language: ?lang= → saved → browser
+(function(){
+  let l = new URLSearchParams(location.search).get("lang");
+  if (!l) { try { l = localStorage.getItem("site-lang"); } catch(e){} }
+  if (!l) { const n = (navigator.language || "").toLowerCase(); l = n.startsWith("ar") ? "ar" : n.startsWith("zh") ? "zh" : "en"; }
+  setLang(l);
+})();
+</script>
+</body>
+</html>
