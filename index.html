@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>[公司名称] · 批发供应商</title>
-<meta name="description" content="[公司名称] — 面向批发商的可靠供货伙伴，WhatsApp 直接询价。">
+<title>吴江市群艺纺织绣品 · 批发供应商</title>
+<meta name="description" content="吴江市群艺纺织绣品 — 面向批发商的可靠供货伙伴，WhatsApp 直接询价。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet">
@@ -46,7 +46,8 @@
   header.scrolled{border-bottom-color:var(--line)}
   .nav{display:flex;align-items:center;justify-content:space-between;height:72px;gap:20px}
   .brand{display:flex;align-items:center;gap:12px}
-  .brand-mark{width:40px;height:40px;border-radius:12px;background:var(--accent);color:#fff;display:grid;place-items:center;font-family:var(--font-head);font-weight:700;font-size:18px}
+  .brand-short{display:none}
+  .brand-mark{flex-shrink:0;width:40px;height:40px;border-radius:12px;background:var(--accent);color:#fff;display:grid;place-items:center;font-family:var(--font-head);font-weight:700;font-size:18px}
   .brand-name{font-family:var(--font-head);font-weight:700;font-size:18px;line-height:1.2}
   .brand-tag{font-size:12px;color:var(--muted)}
   .menu{display:flex;gap:28px;list-style:none}
@@ -186,7 +187,16 @@
     .grid,.why-grid,.steps{grid-template-columns:1fr}
     .float-card{inset-inline-start:12px;bottom:12px}
     .brand-tag{display:none}
-    .lang button{padding:6px 8px}
+    header .brand-name{display:none}
+    header .brand-short{display:block;font-size:16px;white-space:nowrap}
+    header .brand{min-width:0}
+    header .brand-short{overflow:hidden;text-overflow:ellipsis}
+    html[lang="ar"] header .brand-short{font-size:14px}
+    .burger{flex-shrink:0;padding:4px}
+    .brand-mark{width:34px;height:34px;font-size:16px}
+    .nav{gap:10px}
+    .lang button{padding:6px 7px;font-size:12px}
+    .nav-right{gap:8px}
     .stat{padding:20px 12px}
     .stat b{font-size:28px}
   }
@@ -197,9 +207,10 @@
 <header id="top">
   <div class="wrap nav">
     <a href="#home" class="brand" aria-label="Home">
-      <div class="brand-mark" data-i18n="brand.mark">L</div>
+      <div class="brand-mark" data-i18n="brand.mark">群</div>
       <div>
         <div class="brand-name" data-i18n="brand.name"></div>
+        <div class="brand-name brand-short" data-i18n="brand.short"></div>
         <div class="brand-tag" data-i18n="brand.tag"></div>
       </div>
     </a>
@@ -342,7 +353,7 @@
 
 <footer>
   <div class="wrap foot">
-    <div class="brand"><div class="brand-mark" data-i18n="brand.mark">L</div><div class="brand-name" data-i18n="brand.name"></div></div>
+    <div class="brand"><div class="brand-mark" data-i18n="brand.mark">群</div><div class="brand-name" data-i18n="brand.name"></div></div>
     <div class="foot-links">
       <a href="#about" data-i18n="nav.about"></a>
       <a href="#products" data-i18n="nav.products"></a>
@@ -390,8 +401,8 @@ const PRODUCTS = [
    ========================================================= */
 const T = {
   zh: {
-    "meta.title":"[公司名称] · 批发供应商",
-    "brand.mark":"L","brand.name":"[公司名称]","brand.tag":"批发供应商",
+    "meta.title":"吴江市群艺纺织绣品 · 批发供应商",
+    "brand.mark":"群","brand.short":"群艺纺织绣品","brand.name":"吴江市群艺纺织绣品","brand.tag":"批发供应商",
     "nav.home":"首页","nav.about":"公司简介","nav.products":"商品信息","nav.process":"合作流程","nav.contact":"联系我们","nav.cta":"WhatsApp",
     "hero.eyebrow":"批发商值得信赖的供货伙伴",
     "hero.title":"好货源，稳定供，<em>批发更省心</em>",
@@ -399,7 +410,7 @@ const T = {
     "hero.cta1":"WhatsApp 咨询报价","hero.cta2":"查看商品",
     "hero.img":"主图：商品或仓库照片","hero.badge1":"现货充足","hero.badge2":"[XX] 天内发货",
     "stat.1":"年行业经验","stat.2":"合作批发商","stat.3":"出口国家和地区","stat.4":"内回复询价",
-    "about.eyebrow":"公司简介","about.title":"[公司名称]：用心做好每一批货",
+    "about.eyebrow":"公司简介","about.title":"吴江市群艺纺织绣品：用心做好每一批货",
     "about.p1":"[公司简介占位：成立于 20XX 年，总部位于 XX，主营 XX、XX 等商品。我们与多家工厂长期合作，从源头把控品质与价格。]",
     "about.p2":"[补充说明：仓储规模、团队人数、主要服务的市场、典型客户类型等。]",
     "about.c1":"源头工厂直供","about.c2":"常年现货库存","about.c3":"支持定制与贴牌",
@@ -422,14 +433,14 @@ const T = {
     "contact.desc":"发送您需要的商品和数量，我们通常在 24 小时内回复。",
     "contact.phone":"电话","contact.email":"邮箱","contact.address":"地址","contact.hours":"营业时间",
     "contact.addressVal":"中国江苏省苏州市吴江区盛泽镇舜湖东路168号",
-    "contact.hoursVal":"[周一至周六 9:00–18:00]",
+    "contact.hoursVal":"全天 24 小时营业",
     "contact.btn":"立即 WhatsApp 联系","contact.mapOpen":"在地图中打开 ↗",
     "wa.msg":"您好，我是批发商，想了解贵公司的商品和批发价格。",
     "footer.rights":"保留所有权利。"
   },
   en: {
-    "meta.title":"[Company Name] · Wholesale Supplier",
-    "brand.mark":"L","brand.name":"[Company Name]","brand.tag":"Wholesale Supplier",
+    "meta.title":"Wujiang Qunyi Textile & Embroidery · Wholesale Supplier",
+    "brand.mark":"群","brand.short":"Qunyi Textile","brand.name":"Wujiang Qunyi Textile & Embroidery","brand.tag":"Wholesale Supplier",
     "nav.home":"Home","nav.about":"About","nav.products":"Products","nav.process":"How to order","nav.contact":"Contact","nav.cta":"WhatsApp",
     "hero.eyebrow":"A supply partner wholesalers can rely on",
     "hero.title":"Quality goods, steady supply, <em>wholesale made easy</em>",
@@ -437,7 +448,7 @@ const T = {
     "hero.cta1":"Get a quote on WhatsApp","hero.cta2":"View products",
     "hero.img":"Main image: products or warehouse","hero.badge1":"Ready stock","hero.badge2":"Ships within [XX] days",
     "stat.1":"Years in business","stat.2":"Wholesale partners","stat.3":"Countries served","stat.4":"Quote response",
-    "about.eyebrow":"About us","about.title":"[Company Name]: care in every shipment",
+    "about.eyebrow":"About us","about.title":"Wujiang Qunyi Textile & Embroidery: care in every shipment",
     "about.p1":"[Company profile placeholder: Founded in 20XX and based in XX, we supply XX, XX and more. Long-term partnerships with factories let us control quality and price at the source.]",
     "about.p2":"[More detail: warehouse size, team, main markets served, typical customers.]",
     "about.c1":"Direct from factories","about.c2":"Stock held year-round","about.c3":"Custom & private label",
@@ -460,14 +471,14 @@ const T = {
     "contact.desc":"Send us the products and quantities you need — we usually reply within 24 hours.",
     "contact.phone":"Phone","contact.email":"Email","contact.address":"Address","contact.hours":"Business hours",
     "contact.addressVal":"No. 168 Shunhu East Road, Shengze Town, Wujiang District, Suzhou, Jiangsu, China",
-    "contact.hoursVal":"[Mon–Sat 9:00–18:00]",
+    "contact.hoursVal":"Open 24 hours",
     "contact.btn":"Chat on WhatsApp now","contact.mapOpen":"Open in Maps ↗",
     "wa.msg":"Hello, I'm a wholesaler and would like to know more about your products and wholesale prices.",
     "footer.rights":"All rights reserved."
   },
   ar: {
-    "meta.title":"[اسم الشركة] · مورّد بالجملة",
-    "brand.mark":"L","brand.name":"[اسم الشركة]","brand.tag":"مورّد بالجملة",
+    "meta.title":"ووجيانغ تشيونيي للمنسوجات والتطريز · مورّد بالجملة",
+    "brand.mark":"群","brand.short":"تشيونيي للمنسوجات","brand.name":"ووجيانغ تشيونيي للمنسوجات والتطريز","brand.tag":"مورّد بالجملة",
     "nav.home":"الرئيسية","nav.about":"من نحن","nav.products":"المنتجات","nav.process":"خطوات الطلب","nav.contact":"اتصل بنا","nav.cta":"واتساب",
     "hero.eyebrow":"شريك توريد يعتمد عليه تجار الجملة",
     "hero.title":"بضائع عالية الجودة وتوريد مستقر <em>وتجارة جملة بلا عناء</em>",
@@ -475,7 +486,7 @@ const T = {
     "hero.cta1":"اطلب عرض سعر عبر واتساب","hero.cta2":"تصفح المنتجات",
     "hero.img":"الصورة الرئيسية: المنتجات أو المستودع","hero.badge1":"مخزون جاهز","hero.badge2":"شحن خلال [XX] أيام",
     "stat.1":"سنوات من الخبرة","stat.2":"شريك جملة","stat.3":"دولة نخدمها","stat.4":"للرد على الاستفسارات",
-    "about.eyebrow":"من نحن","about.title":"[اسم الشركة]: عناية في كل شحنة",
+    "about.eyebrow":"من نحن","about.title":"ووجيانغ تشيونيي للمنسوجات والتطريز: عناية في كل شحنة",
     "about.p1":"[نبذة عن الشركة: تأسست عام 20XX ومقرها XX، ونورّد منتجات XX وXX وغيرها. شراكاتنا الطويلة مع المصانع تتيح لنا ضبط الجودة والسعر من المصدر.]",
     "about.p2":"[تفاصيل إضافية: حجم المستودعات، عدد الفريق، الأسواق الرئيسية، نوع العملاء.]",
     "about.c1":"مباشرة من المصانع","about.c2":"مخزون متوفر طوال العام","about.c3":"تخصيص وعلامة تجارية خاصة",
@@ -498,7 +509,7 @@ const T = {
     "contact.desc":"أرسل لنا المنتجات والكميات المطلوبة — نرد عادةً خلال 24 ساعة.",
     "contact.phone":"الهاتف","contact.email":"البريد الإلكتروني","contact.address":"العنوان","contact.hours":"ساعات العمل",
     "contact.addressVal":"رقم 168، طريق شونهو الشرقي، بلدة شنغتسه، منطقة ووجيانغ، سوتشو، مقاطعة جيانغسو، الصين",
-    "contact.hoursVal":"[السبت – الخميس 9:00–18:00]",
+    "contact.hoursVal":"مفتوح على مدار 24 ساعة",
     "contact.btn":"تواصل الآن عبر واتساب","contact.mapOpen":"افتح في الخرائط ↗",
     "wa.msg":"مرحباً، أنا تاجر جملة وأود معرفة المزيد عن منتجاتكم وأسعار الجملة.",
     "footer.rights":"جميع الحقوق محفوظة."
