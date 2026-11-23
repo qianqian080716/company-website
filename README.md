@@ -8,7 +8,7 @@
 
 1. **① CONFIG（公司信息）**
    - `whatsapp`：WhatsApp 号码，格式为国家码+号码，不带 `+` 和空格，例如 `971501234567`
-   - `whatsappDisplay` / `phone` / `email`：页面上显示的联系方式
+   - `whatsappDisplay` / `phones`（可填多个）/ `email`：页面上显示的联系方式
    - `mapQuery`：地图位置，可填地址或经纬度，例如 `"25.2048,55.2708"`
 
 2. **② PRODUCTS（商品）**：按示例格式增删商品，每个商品填写中/英/阿三种语言的名称和规格、起订量 `moq`、类别 `cat`。要显示商品图片，把图片放进 `images/` 文件夹，并加上 `img:"images/文件名.jpg"`。`CATEGORIES` 里可以修改商品类别名称。
